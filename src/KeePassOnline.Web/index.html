@@ -1,0 +1,76 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>KeePass Online</title>
+
+    <!-- Bootstrap -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.4/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+    <h1>KeePass Online</h1>
+
+    <p>This little service allows you to browse passwords from your KeePass database stored online on one of the cloud storages.</p>
+
+    <h2>Security</h2>
+
+    <p>KeePass Online takes security extremly seriously and that's why all the work with the KeePass database happens in your browser only. Neither your master password nor database content travels across the wire to our or other server. That's the best security anybody can provide.</p>
+
+    <p>The whole project is open source at <a href="http://github.com/jakubk/keepassonline">GitHub</a>, so anyone can check that it doesn't contain any malicious code.</p>
+
+    <h2>Open your database</h2>
+
+    <div id="js-open-from-onedrive"></div>
+
+    <button class="btn btn-primary">Open database from OneDrive</button>
+    <button class="btn btn-primary">Open database from Dropbox</button>
+    <button class="btn btn-primary">Open database from Google Drive</button>
+    <button class="btn btn-primary">Open database from iCloud</button>
+    <button class="btn btn-primary">Open database from Box</button>
+    <button class="btn btn-primary">Open database from custom url</button>
+    
+    <h2>How it works?</h2>
+
+    <ul>
+        <li></li>
+    </ul>
+
+    <h2>Limitations</h2>
+
+    <p>KeePass Online supports only the newest format of the database - KDBX files. Also, only databases secured by master passwords are supported. Please <a href="#">vote here</a> for Keyfile support.</p>
+
+    <footer>
+        Made by <a href="https://twitter.com/jakubkad">@jakubkad</a>, write feedback, bug reports and other questions to <a href="mailto:developer@keepassonline.com">developer@keepassonline.com</a>.
+    </footer>
+    
+    <script type="text/javascript" src="https://js.live.net/v5.0/OneDrive.js" id="onedrive-js" client-id="0000000040156844"></script>
+
+    <script type="text/javascript">
+        window.onload = function () {
+            var pickerOptions = {
+                success: function (files) {
+                    var file = files.values[0];
+                    alert("You picked " + file.fileName);
+                    alert(file.link);
+
+                    var masterPassword = prompt('enter your master password');
+
+                    
+
+                },
+                linkType: "downloadLink",
+                multiSelect: false
+            };
+            var pickerButton = OneDrive.createOpenButton(pickerOptions);
+            document.getElementById("js-open-from-onedrive").appendChild(pickerButton);
+        }
+    </script>
+
+    <script src="Content/js/kdbx.js"></script>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.4/js/bootstrap.min.js"></script>
+</body>
+</html>
